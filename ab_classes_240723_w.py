@@ -1,6 +1,8 @@
 from collections import UserDict
 from bd import main_bd
 from datetime import datetime
+import csv
+import json
 
 
 class Field:
@@ -16,7 +18,8 @@ class Field:
 
 
 class Name(Field):
-    ...
+    def __format__(self, format_spec):
+        return format(self.value, format_spec)
 
 
 class Phone(Field):
@@ -109,7 +112,8 @@ class Record:
         return result
 
     def __str__(self) -> str:
-        return f"{self.name} : {', '.join(str(p) for p in self.phones)}  {(str(self.birthday))}"
+        # return f"{self.name} : {', '.join(str(p) for p in self.phones)}  {(str(self.birthday))}"
+        return "{:^20} {:^20} {:^20}".format(self.name, ', '.join(str(p) for p in self.phones), str(self.birthday))
 
     def remove_phone(self, phone):
         for idx, p in enumerate(self.phones):
@@ -127,7 +131,9 @@ class AddressBook(UserDict):
         return f"Contact {record} add success"
 
     def __str__(self) -> str:
-        return "\n".join(str(r) for r in self.data.values())
+        # return "\n".join(str(r) for r in self.data.values())
+        records_str = [str(record) for record in self.data.values()]
+        return "\n".join(records_str)
 
     def iterator(self, n=3):
         result = []
