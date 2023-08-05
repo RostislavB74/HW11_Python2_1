@@ -166,6 +166,7 @@ COMMANDS = {
     get_phone: ("phone ", "5"),
     get_days_to_birthday: ("birthday", "bd", "6"),
     delete_record: ("7"),
+
     hello: ("hello", "hi", "!",)
 }
 
